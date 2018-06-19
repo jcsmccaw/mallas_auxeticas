@@ -1,0 +1,8 @@
+Estimated print time: 5h 0m
+Material usage: 17.67m (42g)
+Printer: Zortrax M200
+Profile: large prints - high quality mode
+Material: Z-ULTRAT
+Layer: 0.14 mm
+Quality: High
+Infill: 10%

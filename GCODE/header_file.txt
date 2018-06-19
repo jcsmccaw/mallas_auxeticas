@@ -1,0 +1,14 @@
+; Sliced by code written by John McCaw. May 2018. 
+G28 ; Home extruder
+G1 Z15 F100
+M107 ; Turn off fan
+G90 ; Absolute positioning
+M82 ; Extruder in absolute mode
+; Activate all used extruder
+M104 T0 S210
+G92 E0 ; Reset extruder position
+; Wait for all used extruders to reach temperature
+M109 T0 S210
+M107
+
+; Sliced by code written by John McCaw. May 2018. \nG28 ; Home extruder\nG1 Z15 F100\nM107 ; Turn off fan\nG90 ; Absolute positioning\nM82 ; Extruder in absolute mode\n; Activate all used extruder\nM104 T0 S210\nG92 E0 ; Reset extruder position\n; Wait for all used extruders to reach temperature\nM109 T0 S210\nM107
