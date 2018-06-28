@@ -1,11 +1,11 @@
 %% Processing the first filtered solidworks point set:
 
-output_filename = 'saddle_hat_Trickmiddle.gcode';
+output_filename = 'saddle_hat_Trickmiddle_w2ExtraLayers.gcode';
 
 % Number of lines in one direction of the sample:
 num_lines = 17;
 sets_lines = 2;
-firstfluff = 0.5; % 0 for high density, 0.5 for low density
+firstfluff = 0; % 0 for high density, 0.5 for low density
 
 num_layers = 8; % Number of times we'll print the whole sucker
 rapid_height = 30; % The height (mm) at which rapid motions happen. 
@@ -15,7 +15,7 @@ x_offset = 35; % Adding 20 mm to the corner of the base holder, then 15 for the 
 % Y axis:
 y_offset = 35; % Y axis is the same offset as the x
 % Z axis:
-z_offset = 11.5; % FIXME: WHERE THE ZERO IS DEPENDS ON WHICH SURFACE IS USED: 
+z_offset = 12.3; % FIXME: WHERE THE ZERO IS DEPENDS ON WHICH SURFACE IS USED: 
 % VANILLA: 10.5mm
 % ANTI-VANILLA: 0.3mm
 % SADDLE: 10.5mm

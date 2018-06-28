@@ -30,17 +30,17 @@ skip = 1; % must be a divisor of detail (for now, FIXME).
 % different porosities. Right now, the focus isn't on achieving specific
 % porosities but achieving control over porosity in general. 
 
-filename = 'hat_trick_bottom_final.gcode'; % Where the gcode will be written
+filename = 'hat_trick_bottom_third_layer_justincase.gcode'; % Where the gcode will be written
 
 feed = 800; % mm/min, feed rate of the printer's motion
 
-ext = 150*150*0.0205; % Extrusion rate of the printer
+ext = 150*150*1.5*0.0205; % Extrusion rate of the printer
 
 E = 0; % The total extrusion, sums throughout print
 
 step = 0.2; % The layer height between bezier surfaces
 
-num_layers = 4; % The number of layers to print
+num_layers = 2; % The number of layers to print
 
 
 % Control Points:
@@ -117,10 +117,10 @@ end
 % Translations:
  P_skipped(:,1,:) = P_skipped(:,1,:) + 35; % 35mm offset for all x
  P_skipped(:,2,:) = P_skipped(:,2,:) + 35;
- P_skipped(:,3,:) = P_skipped(:,3,:) + 10.5;
+ P_skipped(:,3,:) = P_skipped(:,3,:) + 11.9;
  P_opposite_skipped(:,1,:) = P_opposite_skipped(:,1,:) + 35; % 35mm offset for all x
  P_opposite_skipped(:,2,:) = P_opposite_skipped(:,2,:) + 35;
- P_opposite_skipped(:,3,:) = P_opposite_skipped(:,3,:) + 10.5;
+ P_opposite_skipped(:,3,:) = P_opposite_skipped(:,3,:) + 11.9;
 
 %% Prep File:
 fid = fopen(filename, 'a');
