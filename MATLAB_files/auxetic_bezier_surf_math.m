@@ -2,6 +2,7 @@
 syms u v positive % This keeps the funky math to a minimum, and is
 % necessary for some MATLAB functions not to crap out. 
 
+gold = [205/255, 173/255, 0/255]; % Purdue Old Gold Roughly
 % Initialize our Cartesian parametric equations:
 Px = 0;
 Py = 0;
@@ -68,9 +69,9 @@ Pz = simplify(real(Pz))
 figure
 hold on
 fsurf(Px, Py, Pz, [0 1], 'k');
-xlim([-0.5 1.5])
-ylim([-0.5 1.5])
-zlim([0,0.5])
+% xlim([-0.5 1.5])
+% ylim([-0.5 1.5])
+% zlim([0,0.5])
 ylabel('Y')
 xlabel('X')
 zlabel('Z')
@@ -93,7 +94,7 @@ for i = 1:num_lines % creating each row;
     z = subs(Pz);
     x_ = subs(Px);
     y_ = subs(Py);
-    scatter3(x_,y_,z, 'g.');
+    scatter3(x_,y_,z, '.', 'MarkerFaceColor', gold, 'MarkerEdgeColor', gold);
     offset = offset + size_bt;
 end
 
@@ -101,7 +102,7 @@ offset = 2*pi/70;
 % v is discretized so we can output specific points:
 v = linspace(8/70, 60/70,100); 
 
-for i = 1:num_lines % and the other direction
+for i = 1:num_lines + 1 % and the other direction
     if(i == 1)
         offset = offset + size_bt;
     else
@@ -111,7 +112,7 @@ for i = 1:num_lines % and the other direction
         z = subs(Pz);
         x_ = subs(Px);
         y_ = subs(Py);
-        scatter3(x_,y_,z, 'g.');
+        scatter3(x_,y_,z, '.', 'MarkerFaceColor', gold, 'MarkerEdgeColor', gold);
         offset = offset + size_bt;
         
     end
