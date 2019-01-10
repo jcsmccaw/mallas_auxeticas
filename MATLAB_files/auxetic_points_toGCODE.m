@@ -1,6 +1,6 @@
 %% Processing the first filtered solidworks point set:
 
-output_filename = 'saddle_hat_Trickmiddle.gcode';
+output_filename = 'bookmark.gcode';
 
 % Number of lines in one direction of the sample:
 num_lines = 17;
@@ -28,7 +28,7 @@ rfeed = 3000; % FIXME: adjust by printer. 'Rapid Feed'
 E = 0; % Extrusion counter
 layer_height = .2; % mm % 
 
-data = check_andFilter_excel_output(); 
+data = % check_andFilter_excel_output(); 
 
 
 position = 1;
