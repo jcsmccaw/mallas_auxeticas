@@ -129,9 +129,9 @@ for i = 1:n
     end
 end
 % Reduce the workload on the processor for later substitution:
-Px = simplify(real(Px));
-Py = simplify(real(Py));
-Pz = simplify(real(Pz));
+Px = simplify(real(Px))
+Py = simplify(real(Py))
+Pz = simplify(real(Pz))
 
 %% Creating equation driven auxetic trace:
 
