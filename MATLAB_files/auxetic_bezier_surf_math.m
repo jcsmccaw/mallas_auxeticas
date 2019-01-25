@@ -1,7 +1,7 @@
 %% Auxetic Bezier Surface
 syms u v positive % This keeps the funky math to a minimum, and is
 % necessary for some MATLAB functions not to crap out. 
-
+data = [];
 gold = [205/255, 173/255, 0/255]; % Purdue Old Gold Roughly
 % Initialize our Cartesian parametric equations:
 Px = 0;
@@ -18,24 +18,24 @@ A = [-1,3,-3,1;3,-6,3,0;-3,3,0,0;1,0,0,0];
 
 for i = 1:1
 gamma = 1/4;p11 = 70.*[0,0,0];
-p12 = 70.*[1/3, 0, gamma*1/3];
-p13 = 70.*[2/3,0,gamma*2/3];
-p14 = 70.*[1,0,gamma*1];
+p12 = 70.*[1/3, 0, 0];
+p13 = 70.*[2/3,0,0];
+p14 = 70.*[1,0,0];
 
-p21 = 70.*[0,1/3,gamma*1/3];
-p22 = 70.*[1/3,1/3,gamma*4/9];
-p23 = 70.*[2/3,1/3,gamma*5/9];
-p24 = 70.*[1,1/3,gamma*2/3];
+p21 = 70.*[0,1/3,0];
+p22 = 70.*[1/3,1/3,0];
+p23 = 70.*[2/3,1/3,0];
+p24 = 70.*[1,1/3,0];
 
-p31 = 70.*[0,2/3,gamma*2/3];
-p32 = 70.*[1/3,2/3,gamma*5/9];
-p33 = 70.*[2/3,2/3,gamma*4/9];
-p34 = 70.*[1,2/3,gamma*1/3];
+p31 = 70.*[0.2,2/3,0];
+p32 = 70.*[1/3,2/3,0];
+p33 = 70.*[1,2/3,0];
+p34 = 70.*[1.2,2/3,0];
 
-p41 = 70.*[0,1,gamma*1];
-p42 = 70.*[1/3,1,gamma*2/3];
-p43 = 70.*[2/3,1,gamma*1/3];
-p44 = 70.*[1 ,1,gamma*0];
+p41 = 70.*[1/3,1,0];
+p42 = 70.*[2/3,1.3,0];
+p43 = 70.*[3/3,1.7,0];
+p44 = 70.*[1.5 ,1.5,0];
 
 end  % Declare all the control points, collapsed for clarity
 points = {p11,p12,p13,p14;p21,p22,p23,p24;p31,p32,p33,p34;p41,p42,p43,p44};
@@ -78,26 +78,28 @@ zlabel('Z')
 
 %% Creating equation driven auxetic trace:
 % Some necessary parameters (now set to match what was done in SolidWorks):
-amp = 1/70;
+amp = -1/70;
 freq = 70;
 offset = 3*pi/70;
 size_bt = pi/70;
 % u is discretized so we can output specific points. 
 u = linspace(8/70,60/70,100);
+% data = zeros((2*num_lines+1)*100, 3);
 num_lines = 17;
 
 for i = 1:num_lines % creating each row;
-    amp = -amp;
+    amp = amp; % NEGATE
     % v is replaced with v' here:
     v = amp*sin(freq*u)+offset;
     % And v' and u are used to create the three new parametric equations:
     z = subs(Pz);
     x_ = subs(Px);
     y_ = subs(Py);
-    scatter3(x_,y_,z, '.', 'MarkerFaceColor', gold, 'MarkerEdgeColor', gold);
+    data = [data; x_', y_', zeros(length(x_), 1)];
+    scatter(x_,y_, '.', 'MarkerFaceColor', gold, 'MarkerEdgeColor', gold);
     offset = offset + size_bt;
 end
-
+amp = 1.3*amp; % DELETE
 offset = 2*pi/70;
 % v is discretized so we can output specific points:
 v = linspace(8/70, 60/70,100); 
@@ -112,7 +114,8 @@ for i = 1:num_lines + 1 % and the other direction
         z = subs(Pz);
         x_ = subs(Px);
         y_ = subs(Py);
-        scatter3(x_,y_,z, '.', 'MarkerFaceColor', gold, 'MarkerEdgeColor', gold);
+        data = [data; x_', y_', zeros(length(x_), 1)];
+        scatter(x_,y_, '.', 'MarkerFaceColor', gold, 'MarkerEdgeColor', gold);
         offset = offset + size_bt;
         
     end

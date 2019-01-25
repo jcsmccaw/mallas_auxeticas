@@ -1,21 +1,21 @@
 %% Processing the first filtered solidworks point set:
 
-output_filename = 'bookmark.gcode';
+output_filename = 'bookmark_test1.gcode';
 
 % Number of lines in one direction of the sample:
 num_lines = 17;
 sets_lines = 2;
-firstfluff = 0.5; % 0 for high density, 0.5 for low density
+firstfluff = 0; % 0 for high density, 0.5 for low density
 
-num_layers = 8; % Number of times we'll print the whole sucker
-rapid_height = 30; % The height (mm) at which rapid motions happen. 
+num_layers = 2; % Number of times we'll print the whole sucker
+rapid_height = 10; % The height (mm) at which rapid motions happen. 
 % Platform offsets: when the bezier bed is installed on the printer, 
 % X axis:
-x_offset = 35; % Adding 20 mm to the corner of the base holder, then 15 for the base holder
+x_offset = 10; % Adding 20 mm to the corner of the base holder, then 15 for the base holder
 % Y axis:
-y_offset = 35; % Y axis is the same offset as the x
+y_offset = 10; % Y axis is the same offset as the x
 % Z axis:
-z_offset = 11.5; % FIXME: WHERE THE ZERO IS DEPENDS ON WHICH SURFACE IS USED: 
+z_offset = 0; % FIXME: WHERE THE ZERO IS DEPENDS ON WHICH SURFACE IS USED: 
 % VANILLA: 10.5mm
 % ANTI-VANILLA: 0.3mm
 % SADDLE: 10.5mm
@@ -28,7 +28,8 @@ rfeed = 3000; % FIXME: adjust by printer. 'Rapid Feed'
 E = 0; % Extrusion counter
 layer_height = .2; % mm % 
 
-data = % check_andFilter_excel_output(); 
+%data = check_andFilter_excel_output(); % only if using solidworks -->
+%excel pathway
 
 
 position = 1;
@@ -56,6 +57,7 @@ ylabel('Y Axis')
 zlabel('Z Axis')
 
 k = waitforbuttonpress;
+close(gcf)
 % Sorting and outputing the data:
 for q = 1:num_layers
     position = 1;
@@ -107,13 +109,13 @@ for q = 1:num_layers
                         if k == 1 % first extrusion, so we'll output the feed:
                             fprintf(fid, 'G1 F%d X%f Y%f Z%f E%f;\n', pfeed, x, y, z, E+firstfluff);
                             fprintf(fid, 'G92 E%f;\n', E);
-                            disp(k)
+                           % disp(k)
                             disp(position)
                             
                         else % No need to output the feed.
                             fprintf(fid, 'G1 X%f Y%f Z%f E%f;\n', x, y, z, E); 
-                            disp(k)
-                            disp(position)
+                            %%disp(k)
+                           % disp(position)
                         end
 
                     previous = [x,y,z]; % Reset the previous so we can keep computing distances 
@@ -143,11 +145,11 @@ for q = 1:num_layers
                         if k == 1 % first extrusion, so we'll output the feed:
                             fprintf(fid, 'G1 F%d X%f Y%f Z%f E%f;\n', pfeed, x, y, z, E+firstfluff);
                             fprintf(fid, 'G92 E%f;\n', E);
-                            disp(position)
+                            %disp(position)
 
                         else % No need to output the feed.
                             fprintf(fid, 'G1 X%f Y%f Z%f E%f;\n', x, y, z, E);
-                            disp(position)
+                            %disp(position)
                         end
 
                     previous = [x,y,z]; % Reset the previous so we can keep computing distances 
@@ -157,7 +159,7 @@ for q = 1:num_layers
                 end
                 position = position + 100;
             end
-            disp(j)
+           % disp(j)
 %         end
 %         try
 %             traverse_to = data(position+1, :);
